@@ -2,22 +2,26 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <button @click="selectedComp = 'appQuote'">Quote</button>
-        <button @click="selectedComp = 'appAuthor'">Author</button>
-        <button @click="selectedComp = 'appNew'">New</button>
+        <button @click="selected = 'appQuote'">Quote</button>
+        <button @click="selected = 'appAuthor'">Author</button>
+        <button @click="selected = 'appNew'">New</button>
         <hr>
-        <p>{{ selectedComp }}</p>
-        <app-quote>
-          <!-- Commented out to introduce Dynamic Components -->
-          <!-- Passing as multiple slots to child component -->
-          <!-- <h2 slot="title">{{ quote.title }}</h2>
-          <p slot="content">{{ quote.content }}</p> -->
+        <p>{{ selected }}</p>
 
-          <!-- Dynamic Component -->
-          <component :is="selectedComp">
-            <p>test</p>
-          </component>
-        </app-quote>
+        <!-- Commented out to introduce Dynamic Components -->
+        <!-- <app-quote>
+          < Passing as multiple slots to child component >
+          <h2 slot="title">{{ quote.title }}</h2>
+          <p slot="content">{{ quote.content }}</p>
+        </app-quote> -->
+
+        <!-- Dynamic Component -->
+        <component :is="selected">
+          <template v-if="selected == 'appQuote'">
+            <h2 slot="title">{{ quote.title }}</h2>
+            <p slot="content">{{ quote.content }}</p>
+          </template>
+        </component>
       </div>
     </div>
   </div>
@@ -32,7 +36,7 @@ export default {
   data() {
     return {
       quote: { title: 'Test Quote', content: 'A Wonderful Quote' },
-      selectedComp: 'appQuote'
+      selected: 'appQuote'
     }
   },
   components: {
