@@ -16,12 +16,15 @@
         </app-quote> -->
 
         <!-- Dynamic Component -->
-        <component :is="selected">
-          <template v-if="selected == 'appQuote'">
-            <h2 slot="title">{{ quote.title }}</h2>
-            <p slot="content">{{ quote.content }}</p>
-          </template>
-        </component>
+        <!-- Keeping Dynamic Components alive -->
+        <keep-alive>
+          <component :is="selected">
+            <template v-if="selected == 'appQuote'">
+              <h2 slot="title">{{ quote.title }}</h2>
+              <p slot="content">{{ quote.content }}</p>
+            </template>
+          </component>
+        </keep-alive>
       </div>
     </div>
   </div>
